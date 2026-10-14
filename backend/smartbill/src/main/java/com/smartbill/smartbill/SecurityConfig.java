@@ -16,7 +16,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of(
+        config.setAllowedOriginPatterns(List.of(
+            "https://smartbill-frontend-*.vercel.app",
             "https://smartbill-frontend-hazel.vercel.app"
         ));
 
