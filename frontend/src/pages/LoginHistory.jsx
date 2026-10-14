@@ -5,6 +5,7 @@ function LoginHistory() {
   const [loading, setLoading] = useState(true)
 
   const user = JSON.parse(localStorage.getItem("smartbillUser"))
+  const userId = user?.id
 
   useEffect(() => {
     if (!user) {
@@ -12,7 +13,7 @@ function LoginHistory() {
       return
     }
 
-    fetch(`http://localhost:8080/api/users/login-history/${user.id}`)
+    fetch(`${import.meta.env.VITE_API_URL}/api/users/login-history/${user.id}`)
       .then((response) => response.json())
       .then((data) => {
         setHistory(data)
@@ -22,7 +23,7 @@ function LoginHistory() {
         console.error(error)
         setLoading(false)
       })
-  }, [user])
+  }, [userId])
 
   return (
     <div className="login-history-page">

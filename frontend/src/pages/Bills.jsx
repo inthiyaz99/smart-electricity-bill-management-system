@@ -24,7 +24,7 @@ function Bills() {
 
         let activeMeter = null
         if (user && user.id) {
-          const meterResponse = await fetch(`http://localhost:8080/api/meters/user/${user.id}`)
+          const meterResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/meters/user/${user.id}`)
           if (meterResponse.ok) {
             const meters = await meterResponse.json()
             if (Array.isArray(meters) && meters.length > 0) {
@@ -35,7 +35,7 @@ function Bills() {
         }
 
         if (!activeMeter) {
-          const allMetersRes = await fetch("http://localhost:8080/api/meters")
+          const allMetersRes = await fetch(`${import.meta.env.VITE_API_URL}/api/meters`)
           if (allMetersRes.ok) {
             const allMeters = await allMetersRes.json()
             if (Array.isArray(allMeters) && allMeters.length > 0) {
@@ -52,7 +52,7 @@ function Bills() {
         }
 
         // Get bills belonging to this meter
-        const billResponse = await fetch(`http://localhost:8080/api/bills/meter/${activeMeter.id}`)
+        const billResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/bills/meter/${activeMeter.id}`)
         if (billResponse.ok) {
           const billData = await billResponse.json()
           if (Array.isArray(billData)) {

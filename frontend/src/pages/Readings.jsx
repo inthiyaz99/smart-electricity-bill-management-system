@@ -20,7 +20,7 @@ function Readings() {
     try {
       let activeMeter = null
       if (user && user.id) {
-        const meterRes = await fetch(`http://localhost:8080/api/meters/user/${user.id}`)
+        const meterRes = await fetch(`${import.meta.env.VITE_API_URL}/api/meters/user/${user.id}`)
         if (meterRes.ok) {
           const meters = await meterRes.json()
           if (Array.isArray(meters) && meters.length > 0) {
@@ -31,7 +31,7 @@ function Readings() {
       }
 
       if (!activeMeter) {
-        const allMetersRes = await fetch("http://localhost:8080/api/meters")
+        const allMetersRes = await fetch(`${import.meta.env.VITE_API_URL}/api/meters`)
         if (allMetersRes.ok) {
           const allMeters = await allMetersRes.json()
           if (Array.isArray(allMeters) && allMeters.length > 0) {
@@ -41,9 +41,9 @@ function Readings() {
         }
       }
 
-      let readingsUrl = "http://localhost:8080/api/readings"
+      let readingsUrl = `${import.meta.env.VITE_API_URL}/api/readings`
       if (activeMeter && activeMeter.id) {
-        readingsUrl = `http://localhost:8080/api/readings/meter/${activeMeter.id}`
+        readingsUrl = `${import.meta.env.VITE_API_URL}/api/readings/meter/${activeMeter.id}`
       }
 
       const response = await fetch(readingsUrl)
@@ -98,8 +98,8 @@ function Readings() {
 
     try {
       const url = meter && meter.id
-        ? `http://localhost:8080/api/readings/meter/${meter.id}`
-        : "http://localhost:8080/api/readings"
+        ? `${import.meta.env.VITE_API_URL}/api/readings/meter/${meter.id}`
+        : `${import.meta.env.VITE_API_URL}/api/readings`
 
       const response = await fetch(url, {
         method: "POST",

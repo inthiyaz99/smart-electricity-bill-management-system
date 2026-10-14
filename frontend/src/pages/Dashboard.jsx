@@ -39,7 +39,7 @@ function Dashboard() {
       try {
         let activeMeter = null
         if (user && user.id) {
-          const meterRes = await fetch(`http://localhost:8080/api/meters/user/${user.id}`)
+          const meterRes = await fetch(`${import.meta.env.VITE_API_URL}/api/meters/user/${user.id}`)
           if (meterRes.ok) {
             const meters = await meterRes.json()
             if (Array.isArray(meters) && meters.length > 0) {
@@ -50,7 +50,7 @@ function Dashboard() {
         }
 
         if (!activeMeter) {
-          const allMetersRes = await fetch("http://localhost:8080/api/meters")
+          const allMetersRes = await fetch(`${import.meta.env.VITE_API_URL}/api/meters`)
           if (allMetersRes.ok) {
             const meters = await allMetersRes.json()
             if (Array.isArray(meters) && meters.length > 0) {
@@ -60,9 +60,9 @@ function Dashboard() {
           }
         }
 
-        let readingsUrl = "http://localhost:8080/api/readings"
+        let readingsUrl = `${import.meta.env.VITE_API_URL}/api/readings`
         if (activeMeter && activeMeter.id) {
-          readingsUrl = `http://localhost:8080/api/readings/meter/${activeMeter.id}`
+          readingsUrl = `${import.meta.env.VITE_API_URL}/api/readings/meter/${activeMeter.id}`
         }
 
         const readingRes = await fetch(readingsUrl)
@@ -82,7 +82,7 @@ function Dashboard() {
 
             // Calculate bill via progressive endpoint or local fallback
             try {
-              const billRes = await fetch(`http://localhost:8080/api/bills/calculate?units=${latest.unitsUsed}`)
+              const billRes = await fetch(`${import.meta.env.VITE_API_URL}/api/bills/calculate?units=${latest.unitsUsed}`)
               if (billRes.ok) {
                 const amount = await billRes.json()
                 setBill(amount)

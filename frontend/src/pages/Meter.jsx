@@ -16,7 +16,7 @@ function Meter() {
   const loadMeters = async () => {
     if (!user || !user.id) return
     try {
-      const response = await fetch(`http://localhost:8080/api/meters/user/${user.id}`)
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/meters/user/${user.id}`)
       if (response.ok) {
         const data = await response.json()
         if (Array.isArray(data)) {
@@ -57,7 +57,7 @@ function Meter() {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/meters/${user.id}`,
+        `${import.meta.env.VITE_API_URL}/api/meters/${user.id}`,
         {
           method: "POST",
           headers: {

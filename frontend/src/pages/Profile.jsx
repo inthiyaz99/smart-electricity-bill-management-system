@@ -19,7 +19,7 @@ function Profile() {
 
       // Fetch linked meter info
       if (user.id) {
-        fetch(`http://localhost:8080/api/meters/user/${user.id}`)
+        fetch(`${import.meta.env.VITE_API_URL}/api/meters/user/${user.id}`)
           .then((res) => res.json())
           .then((meters) => {
             if (Array.isArray(meters) && meters.length > 0) {

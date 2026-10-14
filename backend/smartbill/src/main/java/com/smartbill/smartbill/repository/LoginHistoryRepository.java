@@ -1,5 +1,5 @@
 package com.smartbill.smartbill.repository;
-
+import java.util.Optional;
 import com.smartbill.smartbill.model.LoginHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 

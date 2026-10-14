@@ -12,7 +12,7 @@ function Navbar() {
     if (user) {
       try {
         await fetch(
-          `http://localhost:8080/api/users/logout/${user.id}`,
+          `${import.meta.env.VITE_API_URL}/api/users/logout/${user.id}`,
           {
             method: "POST"
           }

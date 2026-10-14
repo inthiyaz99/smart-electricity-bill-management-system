@@ -1,3 +1,4 @@
+
 import { useState } from "react"
 import { useNavigate, Link } from "react-router-dom"
 
@@ -30,7 +31,7 @@ function Register() {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/users/register",
+        `${import.meta.env.VITE_API_URL}/api/users/register`,
         {
           method: "POST",
           headers: {
@@ -49,8 +50,8 @@ function Register() {
         alert(result)
       }
     } catch (error) {
+      console.error("Registration error:", error)
       alert("Backend connection failed")
-      console.error(error)
     } finally {
       setLoading(false)
     }
@@ -83,10 +84,8 @@ function Register() {
         <form onSubmit={handleSubmit}>
           <div className="auth-field">
             <label>Full Name</label>
-
             <div className="auth-input">
               <span>◉</span>
-
               <input
                 type="text"
                 placeholder="Enter your full name"
@@ -99,10 +98,8 @@ function Register() {
 
           <div className="auth-field">
             <label>Email</label>
-
             <div className="auth-input">
               <span>✉</span>
-
               <input
                 type="email"
                 placeholder="Enter your email"
@@ -115,10 +112,8 @@ function Register() {
 
           <div className="auth-field">
             <label>Mobile Number</label>
-
             <div className="auth-input">
               <span>◉</span>
-
               <input
                 type="tel"
                 placeholder="Enter your mobile number"
@@ -131,10 +126,8 @@ function Register() {
 
           <div className="auth-field">
             <label>Password</label>
-
             <div className="auth-input">
               <span>⌁</span>
-
               <input
                 type="password"
                 placeholder="Create a password"
@@ -147,10 +140,8 @@ function Register() {
 
           <div className="auth-field">
             <label>Confirm Password</label>
-
             <div className="auth-input">
               <span>⌁</span>
-
               <input
                 type="password"
                 placeholder="Confirm your password"
@@ -166,7 +157,9 @@ function Register() {
             className="auth-button"
             disabled={loading}
           >
-            {loading ? "CREATING ACCOUNT..." : "CREATE SMARTBILL ACCOUNT"}
+            {loading
+              ? "CREATING ACCOUNT..."
+              : "CREATE SMARTBILL ACCOUNT"}
             <span>→</span>
           </button>
         </form>
