@@ -14,10 +14,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = {
-        "http://localhost:5173",
-        "http://localhost:5174"
-})
 public class UserController {
 
     private final UserRepository userRepository;
@@ -140,15 +136,9 @@ public class UserController {
             @PathVariable Long userId) {
 
         Optional<LoginHistory> history =
-                loginHistoryRepository.findAll()
-                        .stream()
-                        .filter(h ->
-                                h.getUserId().equals(userId)
-                                &&
-                                h.getLogoutTime() == null
-                        )
-                        .reduce(
-                                (first, second) -> second
+                loginHistoryRepository
+                        .findFirstByUserIdAndLogoutTimeIsNullOrderByLoginTimeDesc(
+                                userId
                         );
 
         if (history.isPresent()) {

@@ -2,7 +2,9 @@ package com.smartbill.smartbill.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
+@Table(name = "meters")
 public class Meter {
 
     @Id

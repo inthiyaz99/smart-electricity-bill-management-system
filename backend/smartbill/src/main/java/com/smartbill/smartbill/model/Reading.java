@@ -4,8 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
+@Table(name = "readings")
 public class Reading {
 
     @Id
@@ -17,8 +20,8 @@ public class Reading {
     private double unitsUsed;
     private String readingDate;
 
-    @jakarta.persistence.ManyToOne
-    @jakarta.persistence.JoinColumn(name = "meter_id")
+    @ManyToOne
+    @JoinColumn(name = "meter_id")
     private Meter meter;
 
     public Reading() {
